@@ -29,6 +29,11 @@ chart = px.scatter(
     color='st_teff',
     color_continuous_scale=px.colors.sequential.Bluered_r,
     size='pl_bmasse',
+).layout( 
+    title="Exoplanets discovered by " + facility_option,
+    xaxis_title="Discovery Year",
+    yaxis_title="Distance from star",
+    coloraxis_colorbar_title="Temperature (K)",
 )
 
 st.plotly_chart(chart)

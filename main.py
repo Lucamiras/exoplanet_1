@@ -11,7 +11,7 @@ df1 = df1.dropna(subset=['st_teff','pl_bmasse'])
 
 st.header("Exoplanet Exploration")
 st.divider()
-st.subheader("Select a star to view its planets")
+st.subheader("Select an observatory to view planets it discovered.")
 
 unique_facilities = raw_data['disc_facility'].sort_values().unique()
 
@@ -23,7 +23,7 @@ st.write("You selected:", facility_option)
 st.write("Below you can see all exoplanets discovered by this station.")
 
 chart = px.scatter(
-    df1,
+    df,
     x='disc_year',
     y='sy_dist',
     color='st_teff',

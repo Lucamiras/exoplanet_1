@@ -1,30 +1,34 @@
 import streamlit as st
 import pandas as pd
+import altair as alt
+import plotly.express as px
 
-st.header("Exoplanet explorer!")
-st.subheader("Select a station to view the data")
+raw_data = pd.read_csv('data/exo_data.csv')
+df1 = raw_data.copy()
+df1 = df1.dropna(subset=['st_teff','pl_bmasse'])
+
 st.divider()
+st.subheader("Select a star to view its planets")
 
-raw_data = pd.read_csv('data/PSCompPars_2023.09.06_16.02.03.csv')
-stations = raw_data['disc_facility'].sort_values().unique()
+unique_facilities = raw_data['disc_facility'].sort_values().unique()
 
-option = st.selectbox("Choose a station", stations)
+facility_option = st.selectbox("Choose a station", unique_facilities)
+df = raw_data.query("disc_facility == @facility_option")
 
-st.write("You selected:", option)
+st.write("You selected:", facility_option)
 
-# pl_bmasse, sy_dist
+st.write("Below you can see all exoplanets discovered by this station.")
 
-st.write("Below you can see all exoplanets discovered by this station:")
-filtered_df = raw_data.query("disc_facility == @option")
-st.write(filtered_df.head())
-#st.scatter_chart(filtered_df['pl_bmasse'], filtered_df['sy_dist'])
-#st_mass
-st.scatter_chart(
-    filtered_df,
-    x='sy_dist',
-    y='st_logg',
-    size='pl_bmasse'
+chart = px.scatter(
+    df.query("st_teff < 10000"),
+    x='disc_year',
+    y='sy_dist',
+    color='st_teff',
+    color_continuous_scale=px.colors.sequential.Bluered_r,
+    size='pl_bmasse',
 )
+
+st.plotly_chart(chart)
 
 st.subheader("What is an exoplanet?")
 st.video("https://www.youtube.com/watch?v=0ZOhJe_7GrE")

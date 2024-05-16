@@ -23,7 +23,7 @@ st.write("You selected:", facility_option)
 st.write("Below you can see all exoplanets discovered by this station.")
 
 chart = px.scatter(
-    df.query("st_teff < 10000"),
+    df1,
     x='disc_year',
     y='sy_dist',
     color='st_teff',

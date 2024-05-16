@@ -16,7 +16,7 @@ st.write("You selected:", option)
 
 st.write("This is a Streamlit app created by a Python script.")
 filtered_df = raw_data.query("disc_facility == @option")
-st.write(filtered_df)
+st.write(filtered_df.head())
 #st.scatter_chart(filtered_df['pl_bmasse'], filtered_df['sy_dist'])
 #st_mass
 st.scatter_chart(

@@ -14,7 +14,7 @@ st.write("You selected:", option)
 
 # pl_bmasse, sy_dist
 
-st.write("This is a Streamlit app created by a Python script.")
+st.write("Below you can see all exoplanets discovered by this station:")
 filtered_df = raw_data.query("disc_facility == @option")
 st.write(filtered_df.head())
 #st.scatter_chart(filtered_df['pl_bmasse'], filtered_df['sy_dist'])

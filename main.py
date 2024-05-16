@@ -7,6 +7,9 @@ raw_data = pd.read_csv('data/exo_data.csv')
 df1 = raw_data.copy()
 df1 = df1.dropna(subset=['st_teff','pl_bmasse'])
 
+# --- APP SPACE --#
+
+st.header("Exoplanet Exploration")
 st.divider()
 st.subheader("Select a star to view its planets")
 

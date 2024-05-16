@@ -4,8 +4,8 @@ import altair as alt
 import plotly.express as px
 
 raw_data = pd.read_csv('data/exo_data.csv')
-df1 = raw_data.copy()
-df1 = df1.dropna(subset=['st_teff','pl_bmasse'])
+df_pre = raw_data.copy()
+df_pre = df_pre.dropna(subset=['st_teff','pl_bmasse'])
 
 # --- APP SPACE --#
 
@@ -16,7 +16,7 @@ st.subheader("Select an observatory to view planets it discovered.")
 unique_facilities = raw_data['disc_facility'].sort_values().unique()
 
 facility_option = st.selectbox("Choose a station", unique_facilities)
-df = raw_data.query("disc_facility == @facility_option")
+df = df_pre.query("disc_facility == @facility_option")
 
 st.write("You selected:", facility_option)
 
